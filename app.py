@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from PIL import Image
 import io, os
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -88,4 +89,5 @@ def index():
     return render_template("index.html", ascii_result=ascii_result, img_data=img_data, width=width)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
