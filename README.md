@@ -31,3 +31,8 @@ Simple web app to convert images into ASCII art.
 5. Open your browser at `http://localhost:5000`
 
 Enjoy converting images to ASCII!
+
+## Demo
+![image](https://github.com/user-attachments/assets/0f6fc595-2d62-4b44-94b8-b1a63bb459d7)
+
+
