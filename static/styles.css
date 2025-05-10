@@ -3,25 +3,47 @@ body {
     font-family: monospace;
     background-color: #111;
     color: #eee;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
 }
-
 h1 {
     color: #fff;
+    margin: 0;
+    padding: 20px;
+    background-color: #000;
 }
 
+hr.solid {
+  border-top: 1px solid #bbb;
+  margin: 16px 0;
+}
+/* -------------------------- Container Layout -------------------------- */
 .container {
-    max-width: 900px;
-    margin: auto;
+    display: flex;
+    height: calc(100vh - 60px); /* full viewport minus header */
 }
-
+.sidebar {
+    width: 260px;
+    padding: 20px;
+    background-color: #1a1a1a;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
 
 /* -------------------------- Form Elements -------------------------- */
-button,
-select,
-input[type="file"] {
-    margin-top: 10px;
-    padding: 6px 12px;
+.controls-form button,
+.controls-form select,
+.controls-form input[type="file"],
+.controls-form input[type="checkbox"],
+.controls-form input[type="number"] {
+    margin-top: 8px;
+    padding: 4px 12px;
     font-size: 14px;
     border: none;
     background-color: #444;
@@ -29,15 +51,144 @@ input[type="file"] {
     border-radius: 4px;
 }
 
-button:hover {
+.controls-form button:hover,
+.controls-form select:hover,
+.controls-form input[type="file"]:hover {
     background-color: #666;
 }
 
-
-/* -------------------------- Textarea (ASCII Output) -------------------------- */
-textarea {
+/* -------------------------- File Drop Zone -------------------------- */
+.file-drop-zone {
+    border: 2px dashed #555;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    transition: background 0.2s ease;
+    margin-bottom: 12px;
+}
+.file-drop-zone.dragover {
+    background-color: #222;
+    border-color: #888;
+}
+.custom-file {
+    position: relative;
+    display: inline-block;
+    background-color: #444;
+    color: #eee;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.custom-file:hover {
+    background-color: #666;
+}
+.custom-file input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
     width: 100%;
-    height: 500px;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* -------------------------- Radio & Custom Input -------------------------- */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+    font-size: 14px;
+    color: #ddd;
+}
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    line-height: 1.2;
+}
+.radio-group input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    background-color: #111;
+    position: relative;
+}
+.radio-group input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: #eee;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.custom-input {
+    width: 60px;
+    padding: 4px 6px;
+    background-color: #222;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-size: 12px;
+}
+.custom-input::-webkit-outer-spin-button,
+.custom-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.input-hint {
+    font-size: 11px;
+    color: #888;
+    margin-left: 44px;
+}
+
+/* -------------------------- Dropdown -------------------------- */
+.charset-group {
+    margin: 12px 0;
+    font-size: 14px;
+    color: #ddd;
+}
+.charset-group select {
+    margin-left: 8px;
+    padding: 4px;
+    background: #222;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #eee;
+}
+
+/* -------------------------- Preview Section -------------------------- */
+.preview-section {
+    margin-bottom: 20px;
+}
+.preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border: 1px solid #555;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* -------------------------- Output Section -------------------------- */
+.output-section {
+    margin-top: 20px;
+}
+.output-section textarea {
+    width: 100%;
+    height: calc(100vh - 420px);
     font-family: "Fira Mono", "Courier New", monospace;
     font-size: 12px;
     background-color: #222;
@@ -48,29 +199,10 @@ textarea {
     white-space: pre;
 }
 
-
-/* -------------------------- Image Preview -------------------------- */
-.preview-section {
-    margin-bottom: 10px;
-}
-
-.preview-image {
-    max-width: 128px;
-    max-height: 128px;
-    border: 1px solid #555;
-    display: none; 
-}
-
-/* -------------------------- Output Section -------------------------- */
-.output-section {
-    margin-top: 20px;
-}
-
-
 /* -------------------------- Toast Notification -------------------------- */
 .toast {
     position: absolute;
-    background: #333 ;
+    background: #333;
     color: #fff;
     padding: 4px 6px;
     border-radius: 6px;
@@ -78,125 +210,31 @@ textarea {
     z-index: 9999;
     font-size: 12px;
     pointer-events: none;
-    transition: opacity 0.3s ease;
     opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
-
-/* -------------------------- radio button -------------------------- */
-.radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+/* -------------------------- Invert Checkbox -------------------------- */
+.invert-group {
     margin: 12px 0;
     font-size: 14px;
     color: #ddd;
 }
-
-.radio-group label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    line-height: 1.2;
+.invert-group input[type="checkbox"] {
+    margin-right: 8px;
 }
 
-.radio-group input[type="radio"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #aaa;
-    border-radius: 50%;
-    background-color: #111;
-    display: inline-block;
-    position: relative;
-}
-
-.radio-group input[type="radio"]:checked::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 8px;
-    height: 8px;
-    background-color: white;
-    border-radius: 50%;
-}
-
-.radio-group .custom-input {
-    width: 60px;
-    padding: 4px 6px;
-    background-color: #222;
-    color: white;
-    border: 1px solid #555;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.custom-input::-webkit-outer-spin-button,
-.custom-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.custom-radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.input-hint {
-    font-size: 11px;
-    color: #888;
-    margin-left: 44px;
-    /* display: none; */
-}
-
-/* .custom-radio-group:hover .input-hint {
-    display: block;
-} */
-
-
-
-/* -------------------------- custom file -------------------------- */
-.file-drop-zone {
-    border: 2px dashed #555;
-    border-radius: 6px;
-    padding: 16px;
-    text-align: center;
-    transition: background 0.2s ease;
-    margin-bottom: 12px;
-}
-
-.file-drop-zone.dragover {
-    background-color: #222;
-    border-color: #888;
-}
-
-.custom-file {
-    position: relative;
-    display: inline-block;
-    background-color: #444;
-    color: #eee;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.custom-file:hover {
-    background-color: #666;
-}
-
-.custom-file input[type="file"] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
+/* -------------------------- Result -------------------------- */
+.ascii-output {
+  width: 80%;
+  max-height: 60vh;      
+  overflow: auto;
+  white-space: pre;
+  word-wrap: normal;
+  box-sizing: border-box;
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 10px;
+  resize: vertical;
 }
