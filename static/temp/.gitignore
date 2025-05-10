@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# Flask session files or temp storage
+instance/
+*.sqlite3
+*.db
+
+# Uploaded/temp files
+static/temp/
+
+# VS Code settings (optional)
+.vscode/

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ASCII Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>ASCII Art Generator</h1>
+
+        <div class="preview-section">
+            <h4>Preview:</h4>
+            <img src="{{ img_data or '' }}" alt="Uploaded Image" class="preview-image">
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="upload-form">
+            <div class="file-drop-zone" id="dropZone">
+            <label class="custom-file">
+                <input type="file" name="image" accept="image/*" id="fileInput">
+                <span>Select or drop image</span>
+            </label>
+            </div>
+
+            <div class="radio-group">
+                <span>Size:</span>
+                
+                <label>
+                    <input type="radio" name="size" value="20" {% if width == 40 %}checked{% endif %}>
+                    <span class="custom-radio"></span> Tiny
+                </label>
+
+                <label>
+                    <input type="radio" name="size" value="40" {% if width == 40 %}checked{% endif %}>
+                    <span class="custom-radio"></span> Small
+                </label>
+
+                <label>
+                    <input type="radio" name="size" value="60" {% if width == 60 %}checked{% endif %}>
+                    <span class="custom-radio"></span> Medium
+                </label>
+
+                <label>
+                    <input type="radio" name="size" value="80" {% if width == 80 %}checked{% endif %}>
+                    <span class="custom-radio"></span> Large
+                </label>
+
+                <div class="custom-radio-group">
+                    <label>
+                        <input type="radio" name="size" value="custom" {% if width not in [20,40,60,80] %}checked{% endif %}>
+                        <span class="custom-radio"></span> Custom:
+                        <input type="number" class="custom-input" name="custom_width" min="10" max="300" value="{{ width if width not in [40,60,80] else '' }}">
+                    </label>
+                    <small class="input-hint">Scroll or drag to adjust</small>
+                </div>
+            </div>
+
+            <button type="submit">Generate</button>
+            <button type="submit" name="reset" value="1">Reset</button>
+        </form>
+
+
+        <div class="output-section">
+            <h3>Result:</h3>
+            <textarea id="asciiBox" readonly>{{ ascii_result }}</textarea>
+            <br>
+            <button id="copyBtn" onclick="copyText()">Copy</button>
+        </div>
+    </div>
+</body>
+</html>

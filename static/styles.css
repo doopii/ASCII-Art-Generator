@@ -1,0 +1,202 @@
+/* -------------------------- Base Layout -------------------------- */
+body {
+    font-family: monospace;
+    background-color: #111;
+    color: #eee;
+    padding: 20px;
+}
+
+h1 {
+    color: #fff;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+
+/* -------------------------- Form Elements -------------------------- */
+button,
+select,
+input[type="file"] {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    background-color: #444;
+    color: white;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #666;
+}
+
+
+/* -------------------------- Textarea (ASCII Output) -------------------------- */
+textarea {
+    width: 100%;
+    height: 500px;
+    font-family: "Fira Mono", "Courier New", monospace;
+    font-size: 12px;
+    background-color: #222;
+    color: #eee;
+    border: 1px solid #555;
+    padding: 10px;
+    resize: vertical;
+    white-space: pre;
+}
+
+
+/* -------------------------- Image Preview -------------------------- */
+.preview-section {
+    margin-bottom: 10px;
+}
+
+.preview-image {
+    max-width: 128px;
+    max-height: 128px;
+    border: 1px solid #555;
+    display: none; 
+}
+
+/* -------------------------- Output Section -------------------------- */
+.output-section {
+    margin-top: 20px;
+}
+
+
+/* -------------------------- Toast Notification -------------------------- */
+.toast {
+    position: absolute;
+    background: #333 ;
+    color: #fff;
+    padding: 4px 6px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 9999;
+    font-size: 12px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0.8;
+}
+
+
+/* -------------------------- radio button -------------------------- */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    line-height: 1.2;
+}
+
+.radio-group input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    background-color: #111;
+    display: inline-block;
+    position: relative;
+}
+
+.radio-group input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.radio-group .custom-input {
+    width: 60px;
+    padding: 4px 6px;
+    background-color: #222;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.custom-input::-webkit-outer-spin-button,
+.custom-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.custom-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-hint {
+    font-size: 11px;
+    color: #888;
+    margin-left: 44px;
+    /* display: none; */
+}
+
+/* .custom-radio-group:hover .input-hint {
+    display: block;
+} */
+
+
+
+/* -------------------------- custom file -------------------------- */
+.file-drop-zone {
+    border: 2px dashed #555;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    transition: background 0.2s ease;
+    margin-bottom: 12px;
+}
+
+.file-drop-zone.dragover {
+    background-color: #222;
+    border-color: #888;
+}
+
+.custom-file {
+    position: relative;
+    display: inline-block;
+    background-color: #444;
+    color: #eee;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.custom-file:hover {
+    background-color: #666;
+}
+
+.custom-file input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
