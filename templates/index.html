@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ASCII Generator</title>
+    <title>ASCII Art Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
@@ -17,17 +17,17 @@
 
         <form method="post" enctype="multipart/form-data" class="upload-form">
             <div class="file-drop-zone" id="dropZone">
-            <label class="custom-file">
-                <input type="file" name="image" accept="image/*" id="fileInput">
-                <span>Select or drop image</span>
-            </label>
+                <label class="custom-file">
+                    <input type="file" name="image" accept="image/*" id="fileInput">
+                    <span>Select or drop image</span>
+                </label>
             </div>
 
             <div class="radio-group">
                 <span>Size:</span>
-                
+
                 <label>
-                    <input type="radio" name="size" value="20" {% if width == 40 %}checked{% endif %}>
+                    <input type="radio" name="size" value="20" {% if width == 20 %}checked{% endif %}>
                     <span class="custom-radio"></span> Tiny
                 </label>
 
@@ -50,16 +50,22 @@
                     <label>
                         <input type="radio" name="size" value="custom" {% if width not in [20,40,60,80] %}checked{% endif %}>
                         <span class="custom-radio"></span> Custom:
-                        <input type="number" class="custom-input" name="custom_width" min="10" max="300" value="{{ width if width not in [40,60,80] else '' }}">
+                        <input type="number" class="custom-input" name="custom_width" min="10" max="300" value="{{ width if width not in [20,40,60,80] else '' }}">
                     </label>
                     <small class="input-hint">Scroll or drag to adjust</small>
                 </div>
             </div>
 
+            <div class="invert-group">
+                <label>
+                    <input type="checkbox" name="invert" {% if invert %}checked{% endif %}>
+                    Invert ASCII Shades
+                </label>
+            </div>
+
             <button type="submit">Generate</button>
             <button type="submit" name="reset" value="1">Reset</button>
         </form>
-
 
         <div class="output-section">
             <h3>Result:</h3>
