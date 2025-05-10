@@ -1,20 +1,33 @@
 # ASCII Art Generator
 
-Turn any uploaded image into pixel-style ASCII art — right in your browser.
+Simple web app to convert images into ASCII art.
 
-Built with:
-- Flask (Python)
-- HTML/CSS/JS (vanilla)
-- Deploy-ready for Render
+## Features
 
----
+* Drag & drop or click to upload images
+* Select output width (predefined or custom)
+* Choose character set: Braille, ASCII, Chinese
+* Invert light/dark mapping
+* Live preview and copy to clipboard
 
-## 🚀 Features
+## Quick Start
 
-- 🖼 Live image preview
-- 🧮 Adjustable output size (Tiny / Small / Medium / Large / Custom)
-- 📋 One-click copy to clipboard
-- ♻️ Image and preview persist across resolution changes (auto-cleared on refresh)
+1. Clone the repo
+2. Install dependencies
 
----
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Create a `.env` file with:
 
+   ```ini
+   SECRET_KEY=your_secret_key
+   ```
+4. Run the app:
+
+   ```bash
+   python app.py
+   ```
+5. Open your browser at `http://localhost:5000`
+
+Enjoy converting images to ASCII!
